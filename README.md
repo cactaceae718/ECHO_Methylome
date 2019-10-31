@@ -1,1 +1,1 @@
-ECHO_Methylome
+ECHO_Methylome SLURM
