@@ -109,27 +109,27 @@ manhattan(subset(df_myDiff_rev, CHR == 8 | CHR == 4, highlight = DMS))
 #perform qq plot
 qq(df_myDiff_rev$P, main = "Q-Q plot of diff_methy p-values")
 
-
-
-
-# #####===================================================================================================
-# ##### Annotation based on limma (model?) 
+===================================================================================================
+###### Annotation based on limma 
 library(genomation)
 #read the gene BED file
 gene_obj <- readTranscriptFeatures("/Users/cactaceae/Desktop/Methylomics/refseq.hg38.bed.txt")
 
-###annotate differentially methylated CpGs with promoter/exon/intron using annotation data
-diffAnn <- annotateWithGeneParts(as(Diff15p,"GRanges"),gene.obj)
+#annotate differentially methylated CpGs with promoter/exon/intron using annotation data
+diffAnn <- annotateWithGeneParts(as(Diff15p,"GRanges"),gene_obj)
 
-#diffAnn_overlap <- annotateWithGeneParts(as(myDiff25p,"GRanges"),gene.obj,intersect.chr=TRUE)
+#diffAnn_overlap <- annotateWithGeneParts(as(Diff25p,"GRanges"),gene_obj,intersect.chr=TRUE)
 getAssociationWithTSS(diffAnn)
-
 getTargetAnnotationStats(diffAnn, percentage=TRUE, precedence=TRUE)
 #diffAnn@precedence == TargetAnnotationStats
 
-plotTargetAnnotation(diffAnn,precedence=TRUE, main="differential methylation annotation")
-#######TRUE percentage of annotation feature. FALSE, number of annotation features
+plotTargetAnnotation(diffAnn,precedence=TRUE, main="differential methylation annotation") #TRUE percentage of annotation feature. FALSE, number of annotation features
 getFeatsWithTargetsStats(diffAnn,percentage=F)
 
 #diffAnn@perc.of.OlapFeat==getFeatsWithTargetsStats
+                          
+#read the shores and flanking regions and name the flanks as shores and CpG islands as CpGi
+cpgi_obj=readFeatureFlank("/Users/cactaceae/Desktop/Methylomics/cpgIslandExt_rev.txt",feature.flank.name=c("CpGi","shores"))
+diffCpGann_10p=annotateWithFeatureFlank(as(Diff10p,"GRanges"), cpgi_obj$CpGi,cpgi_obj$shores, feature.name="CpGi",flank.name="shores")
+plotTargetAnnotation(diffCpGann_10p,col=c("green","gray","white"), main="differential methylation annotation")                          
 ```
