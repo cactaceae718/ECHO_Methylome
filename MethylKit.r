@@ -132,4 +132,13 @@ getFeatsWithTargetsStats(diffAnn,percentage=F)
 cpgi_obj=readFeatureFlank("/Users/cactaceae/Desktop/Methylomics/cpgIslandExt_rev.txt",feature.flank.name=c("CpGi","shores"))
 diffCpGann_10p=annotateWithFeatureFlank(as(Diff10p,"GRanges"), cpgi_obj$CpGi,cpgi_obj$shores, feature.name="CpGi",flank.name="shores")
 plotTargetAnnotation(diffCpGann_10p,col=c("green","gray","white"), main="differential methylation annotation")                          
-```
+
+===================================================================================================
+###### Differential methylation profiles can be segmented to sections that contain similar CpGs with respect to their methylation profiles. 
+#e.g segmentation analysis will usually reveal high or low methylated regions.
+
+#it finds the optimal number of componets as 4 shown in plotting figure
+res15p=methSeg(as(Diff15p, "GRanges"),diagnostic.plot=TRUE,maxInt=100,minSeg=10)
+
+#get segments to BED file
+methSeg2bed(res15p,filename="Diff10p.seg.bed")
