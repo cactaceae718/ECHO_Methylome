@@ -1,6 +1,6 @@
 # This folder has Shell and R scripts for HPC NYU Langone Phoenix (SGE)
 # Project: ECHO_EWAS Methylome Data
-This script is for targeted bisulfite sequencing (Methyl-Seq) which is a next-generation sequencing technology used to provide the status of single-base resolution of methylated C by treating the DNA with sodium bisulfite before sequencing. 
+Scripts here are for targeted bisulfite sequencing (Methyl-Seq) which is a next-generation sequencing technology used to provide the status of single-base resolution of methylated C by treating the DNA with sodium bisulfite before sequencing. 
 
 Analysis workflow
 1.	Quality control analysis: FASTQC
